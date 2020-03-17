@@ -1,5 +1,14 @@
-from unit_categoy import unit_categories
+from unit_category import unit_categories
 
 def lambda_handler(event, context):
+    result = {}
     for categoy in unit_categories:
-        print(categoy.name)
+        result[categoy.name] = list(categoy.items)
+    return {
+            'statusCode': 400,
+            'body': result,
+            'header': {
+              'content-type': 'application/json'
+            },
+            'input': event
+        } 
