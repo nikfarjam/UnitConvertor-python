@@ -1,6 +1,6 @@
 import json
 import logging
-from converter_utils import celsius_to_fahrenheit
+import converter_utils
 from math_utils import isFloat 
 
 logger = logging.getLogger()
@@ -34,7 +34,7 @@ def lambda_handler(event, context):
         } 
     
     celsius = float(event['value'])
-    fahrenheit = celsius_to_fahrenheit(celsius)
+    fahrenheit =  getattr(converter_utils, 'celsius_to_fahrenheit')(celsius)
     print('Result is ',fahrenheit)
     
     return {
