@@ -1,4 +1,4 @@
-def celsius_to_fahrenheit(celsius):
+def celsius_to_fahrenheit(celsius, fraction = 2):
     if celsius:
-        return (celsius * 9 / 5 ) + 32
+        return round((celsius * 9 / 5 ) + 32, fraction)
     return float('nan')
