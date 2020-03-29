@@ -1,0 +1,8 @@
+""" Run lambda_handler with some sample data """
+    >>> import sys
+    >>> sys.path.append('..')
+    >>> from lambda_function import lambda_handler
+
+    >>> lambda_handler({},'')
+    event {}
+    {'statusCode': 400, 'body': {'message': 'Value is empty'}, 'header': {'content-type': 'application/json'}, 'input': {}}
