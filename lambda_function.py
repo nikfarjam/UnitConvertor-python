@@ -1,7 +1,7 @@
 import json
 import logging
 import converter_utils
-from math_utils import isFloat
+from math_utils import is_float
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -14,7 +14,7 @@ def validate_input(event):
         return 'Unit category is empty'
     if 'units' not in event:
         return 'Units is empty'
-    if not isFloat(event['value']):
+    if not is_float(event['value']):
         return 'Value is not a valid number'
     return ''
 
