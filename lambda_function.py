@@ -1,49 +1,30 @@
 import json
-import logging
-import converter_utils
-from math_utils import is_float
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
-
-def validate_input(event):
-    if 'value' not in event:
-        return 'Value is empty'
-    if 'category' not in event:
-        return 'Unit category is empty'
-    if 'units' not in event:
-        return 'Units is empty'
-    if not is_float(event['value']):
-        return 'Value is not a valid number'
-    return ''
-
+from unit_converter import UnitConverter, InvalidInputError
 
 def lambda_handler(event, context):
     print('event', event)
-    validation_message = validate_input(event)
-    if validation_message != '':
-        message = str(validation_message)
+    uc = UnitConverter(event)
+        
+    try:
+        result = uc.calculate()
+    except InvalidInputError as error:
         return {
             'statusCode': 400,
             'body': {
-                'message': message
+                'message': str(error)
             },
             'header': {
                 'content-type': 'application/json'
             },
             'input': event
         }
-
-    celsius = float(event['value'])
-    fahrenheit = getattr(converter_utils, 'celsius_to_fahrenheit')(celsius)
-    print('Result is ', fahrenheit)
+    print('Result is ', result)
 
     return {
         'statusCode': 200,
         'body': {
-            'celsius': str(celsius),
-            'fahrenheit': str(fahrenheit)
+            'celsius': str(event['value']),
+            'fahrenheit': str(result)
         },
         'header': {
             'content-type': 'application/json'
