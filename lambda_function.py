@@ -3,9 +3,9 @@ from unit_converter import UnitConverter, InvalidInputError
 
 def lambda_handler(event, context):
     print('event', event)
-    uc = UnitConverter(event)
         
     try:
+        uc = UnitConverter(event)
         result = uc.calculate()
     except InvalidInputError as error:
         return {
