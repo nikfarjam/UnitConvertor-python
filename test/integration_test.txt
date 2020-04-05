@@ -6,9 +6,9 @@
     event {}
     {'statusCode': 400, 'body': {'message': 'Value is empty'}, 'header': {'content-type': 'application/json'}, 'input': {}}
 
-    >>> lambda_handler({"category": "cat1","units": "c-f","value": "rtrt"}, None)
-    event {'category': 'cat1', 'units': 'c-f', 'value': 'rtrt'}
-    {'statusCode': 400, 'body': {'message': 'Value is not a valid number'}, 'header': {'content-type': 'application/json'}, 'input': {'category': 'cat1', 'units': 'c-f', 'value': 'rtrt'}}
+    >>> lambda_handler({"category": "cat1","units": "c-f","value": "test"}, None)
+    event {'category': 'cat1', 'units': 'c-f', 'value': 'test'}
+    {'statusCode': 400, 'body': {'message': 'Value is not a valid number'}, 'header': {'content-type': 'application/json'}, 'input': {'category': 'cat1', 'units': 'c-f', 'value': 'test'}}
 
     >>> lambda_handler({"category": "cat1", "units": "c-f", "value": "100.5"}, None)
     event {'category': 'cat1', 'units': 'c-f', 'value': '100.5'}

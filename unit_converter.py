@@ -6,34 +6,38 @@ class InvalidInputError(Exception):
    pass
 
 class UnitConverter:
-    def __init__(self, event):
+    def __init__(self, input):
         super().__init__()
-        self.event = event
+        self.input = input
 
-    def validate_input(self):
-        if 'value' not in self.event:
-            return 'Value is empty'
-        if 'category' not in self.event:
-            return 'Unit category is empty'
-        if 'units' not in self.event:
-            return 'Units is empty'
-        if not is_float(self.event['value']):
-            return 'Value is not a valid number'
-        return ''
+    @property
+    def input(self):
+        return self._input
+
+    @input.setter
+    def input(self, input):
+        self.validate_input(input)
+        self._input = input
+
+    def validate_input(self, input):
+        if 'value' not in input:
+            raise InvalidInputError('Value is empty')
+        if 'category' not in input:
+            raise InvalidInputError('Unit category is empty')
+        if 'units' not in input:
+            raise InvalidInputError('Units is empty')
+        if not is_float(input['value']):
+            raise InvalidInputError('Value is not a valid number')
 
     def get_value(self):
-        return self.event['value']
+        return self.input['value']
     
     def get_operation(self):
         return 'celsius_to_fahrenheit'
     
     def calculate(self):
-        validation_message = self.validate_input()
-        if validation_message != '':
-            raise InvalidInputError(validation_message)
-
-        _value_as_flat = float(self.get_value())
+        value_as_flat = float(self.get_value())
         operation = self.get_operation()
-        _function = getattr(converter_utils, operation)
-        result = _function(_value_as_flat)
+        function = getattr(converter_utils, operation)
+        result = function(value_as_flat)
         return result
