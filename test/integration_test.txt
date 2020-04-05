@@ -10,6 +10,30 @@
     event {'category': 'cat1', 'units': 'c-f', 'value': 'test'}
     {'statusCode': 400, 'body': {'message': 'Value is not a valid number'}, 'header': {'content-type': 'application/json'}, 'input': {'category': 'cat1', 'units': 'c-f', 'value': 'test'}}
 
+    >>> lambda_handler({"category": "cat1","units": "c-f","value": ""}, None)
+    event {'category': 'cat1', 'units': 'c-f', 'value': ''}
+    {'statusCode': 400, 'body': {'message': 'Value is not a valid number'}, 'header': {'content-type': 'application/json'}, 'input': {'category': 'cat1', 'units': 'c-f', 'value': ''}}
+
+    >>> lambda_handler({"category": "cat1","units": "c-f"}, None)
+    event {'category': 'cat1', 'units': 'c-f'}
+    {'statusCode': 400, 'body': {'message': 'Value is empty'}, 'header': {'content-type': 'application/json'}, 'input': {'category': 'cat1', 'units': 'c-f'}}
+
+    >>> lambda_handler({"units": "c-f","value": "100.5"}, None)
+    event {'units': 'c-f', 'value': '100.5'}
+    {'statusCode': 400, 'body': {'message': 'Unit category is empty'}, 'header': {'content-type': 'application/json'}, 'input': {'units': 'c-f', 'value': '100.5'}}
+
+    >>> lambda_handler({"category": "","units": "c-f","value": "100.5"}, None)
+    event {'category': '', 'units': 'c-f', 'value': '100.5'}
+    {'statusCode': 400, 'body': {'message': 'Unit category is empty'}, 'header': {'content-type': 'application/json'}, 'input': {'category': '', 'units': 'c-f', 'value': '100.5'}}
+
+    >>> lambda_handler({"category": "cat1","value": "100.5"}, None)
+    event {'category': 'cat1', 'value': '100.5'}
+    {'statusCode': 400, 'body': {'message': 'Units is empty'}, 'header': {'content-type': 'application/json'}, 'input': {'category': 'cat1', 'value': '100.5'}}
+
+    >>> lambda_handler({"category": "cat1", "units": "", "value": "100.5"}, None)
+    event {'category': 'cat1', 'units': '', 'value': '100.5'}
+    {'statusCode': 400, 'body': {'message': 'Units is empty'}, 'header': {'content-type': 'application/json'}, 'input': {'category': 'cat1', 'units': '', 'value': '100.5'}}
+
     >>> lambda_handler({"category": "cat1", "units": "c-f", "value": "100.5"}, None)
     event {'category': 'cat1', 'units': 'c-f', 'value': '100.5'}
     Result is  212.9
