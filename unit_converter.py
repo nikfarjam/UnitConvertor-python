@@ -22,9 +22,9 @@ class UnitConverter:
     def validate_input(self, input):
         if 'value' not in input:
             raise InvalidInputError('Value is empty')
-        if 'category' not in input:
+        if 'category' not in input or not input['category']:
             raise InvalidInputError('Unit category is empty')
-        if 'units' not in input:
+        if 'units' not in input or not input['units']:
             raise InvalidInputError('Units is empty')
         if not is_float(input['value']):
             raise InvalidInputError('Value is not a valid number')
