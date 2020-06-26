@@ -1,11 +1,20 @@
 # UnitConvertor-python
 An example of AWS serverless RESTful API by Python
 
-### Setup
+### Install
 
-This project uses Pipenv to setup environment and mange dependencies
+This project use [Pipenv](https://pypi.org/project/pipenv/) to manage dependencies and environment.
+For **production** installation
+
+   ``` pipenv install ``` 
+
+   ``` pipenv shell ```
+
+For **development** and **test**
 
    ``` pipenv install --dev ```
+
+   ``` pipenv shell ```
 
 ### Tests
 
