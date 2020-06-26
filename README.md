@@ -18,11 +18,14 @@ For **development** and **test**
 
 ### Tests
 
+In order to run test run ``` pipenv shell ```
+
 1. **Integration Test**
    
-   ``` >python3 ./test/integration_test.py ```
+   ``` python ./test/integration_test.py ```
 
 2. **Unit Tests**
    
-   ``` >python3 -m pytest ./test/test_*.py ```
+   ``` python3 -m pytest ./test/test_*.py ```
 
+s
